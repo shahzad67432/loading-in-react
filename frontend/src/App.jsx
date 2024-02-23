@@ -5,6 +5,7 @@ import Functional from "./components/Functional";
 import Todos from "./components/Todos";
 import useSWR from 'swr'
 import useMousePosition from "./components/MousePosition";
+import useDebounce from "./components/Debounce";
 
 function useIsOnline(){
   const [isOnline, setIsOnline] = useState(  window.navigator.onLine)
@@ -32,6 +33,8 @@ function Countters() {
   // const {isLoading} = useSWR('/api/user', fetcher)
   const IsOnline = useIsOnline()
   const mousePointer = useMousePosition();
+  const [inputValue, setInputValue] = useState('')
+  const debounceValue = useDebounce(inputValue, 500)
   return (  
     <>
       {/* <div> <Todos/> </div> */}
@@ -39,7 +42,10 @@ function Countters() {
       <div>
         Your mouse position is {mousePointer.x} {mousePointer.y}
       </div>
-
+      <div>
+          <input type="text" value={inputValue} placeholder="search" onChange={(e)=>{setInputValue(e.target.value)}}/>
+          debounce value is {debounceValue}
+      </div>
     </>
   );
 }

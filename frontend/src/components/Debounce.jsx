@@ -7,11 +7,9 @@ function useDebounce(value, timeout) {
             setDebounceValue(value)
         }, timeout)
         return ()=>{ clearTimeout(timeoutNumber)}
-    }, [value])
+    }, [value, timeout])
 
-    return value, delay
+    return debounceValue;
 }
-
-debounceValue(value, 500)
 
 export default useDebounce;
